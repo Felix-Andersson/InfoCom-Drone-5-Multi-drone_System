@@ -1,0 +1,103 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/lib/python3/dist-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/lib/python3/dist-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/hardaskott/Scripts/Python/InfoCom-Drone-5-Multi-drone_System/webserver/database.py", line 30, in drone
+    redis_server.set(droneID, one_drone_dict)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/commands/core.py", line 2305, in set
+    return self.execute_command("SET", *pieces, **options)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 622, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 633, in _execute_command
+    return conn.retry.call_with_retry(
+    
+  File "/usr/lib/python3/dist-packages/redis/retry.py", line 87, in call_with_retry
+    return do()
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 634, in <lambda>
+    lambda: self._send_command_parse_response(
+    
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 604, in _send_command_parse_response
+    conn.send_command(*args, **options)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/connection.py", line 609, in send_command
+    self._command_packer.pack(*args),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/connection.py", line 114, in pack
+    for arg in map(self.encode, args):
+               ~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/_parsers/encoders.py", line 29, in encode
+    raise DataError(
+    ^
+redis.exceptions.DataError: Invalid input of type: 'dict'. Convert to a bytes, string, int or float first.
+192.168.10.11 - - [23/Feb/2026 16:52:28] "POST /drone HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/lib/python3/dist-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/lib/python3/dist-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/hardaskott/Scripts/Python/InfoCom-Drone-5-Multi-drone_System/webserver/database.py", line 30, in drone
+    redis_server.set(droneID, one_drone_dict)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/commands/core.py", line 2305, in set
+    return self.execute_command("SET", *pieces, **options)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 622, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 633, in _execute_command
+    return conn.retry.call_with_retry(
+    
+  File "/usr/lib/python3/dist-packages/redis/retry.py", line 87, in call_with_retry
+    return do()
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 634, in <lambda>
+    lambda: self._send_command_parse_response(
+    
+  File "/usr/lib/python3/dist-packages/redis/client.py", line 604, in _send_command_parse_response
+    conn.send_command(*args, **options)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/connection.py", line 609, in send_command
+    self._command_packer.pack(*args),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/connection.py", line 114, in pack
+    for arg in map(self.encode, args):
+               ~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/redis/_parsers/encoders.py", line 29, in encode
+    raise DataError(
+    ^
+redis.exceptions.DataError: Invalid input of type: 'dict'. Convert to a bytes, string, int or float first.

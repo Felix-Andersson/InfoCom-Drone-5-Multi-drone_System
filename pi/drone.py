@@ -38,8 +38,8 @@ def main():
     coords = request.json
     # Get current longitude and latitude of the drone 
     #===================================================================
-    current_longitude = 0
-    current_latitude = 0
+    with open("coords.txt", "r") as f:
+        current_longitude, current_latitude = f.read().split()
     #===================================================================
     from_coord = coords['from']
     to_coord = coords['to']

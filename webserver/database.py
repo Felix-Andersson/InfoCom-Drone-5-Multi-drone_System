@@ -9,7 +9,7 @@ CORS(app)
 
 # change this to connect to your redis server
 # ===============================================
-redis_server = redis.Redis("REDIS_SERVER", decode_responses=True)
+redis_server = redis.Redis(host="localhost", port=6379, decode_responses=True)
 # ===============================================
 
 @app.route('/drone', methods=['POST'])
@@ -25,7 +25,9 @@ def drone():
     # Drone ID, logitude of the drone, latitude of the drone, drone's IP address, the status of the drone
     # Note that you need to store the metioned infomation for all drones in Redis, think carefully how to store them
     # =========================================================================================
-
+    one_drone_dict = {'ip':droneIP, 'longitude':drone_longitude, 'latitude':drone_latitude, 'status':drone_status}
+    
+    redis_server.set(droneID, one_drone_dict)
 
 
 
