@@ -27,7 +27,7 @@ def drone():
     # =========================================================================================
     one_drone_dict = {'ip':droneIP, 'longitude':drone_longitude, 'latitude':drone_latitude, 'status':drone_status}
     
-    redis_server.set(droneID, one_drone_dict)
+    redis_server.set(droneID, json.dumps(one_drone_dict))
 
 
 

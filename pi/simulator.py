@@ -76,4 +76,4 @@ if __name__ == "__main__":
     # and use it for the initial coordinates of next delivery in drone.py
     #=============================================================================
     with open("coords.txt", "w") as f:
-        f.write(f"{current_coords[0]} {current_coords[1]}")
+        f.write(f"{drone_long} {drone_lat}")

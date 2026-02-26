@@ -51,11 +51,21 @@ def get_drones():
     #              }
     # use function translate() to covert the coodirnates to svg coordinates
     #=============================================================================================================================================
-    drone1 = redis_server.get('drone1')
-    drone2 = redis_server.get('drone2')
+    drone_dict = {}
     
-    drone_dict = {'DRONE_1':drone1, 'DRONE_2':drone2}
-    
+    for drone_id in ['drone1', 'drone2']:
+        drone_data = redis_server.get(drone_id)
+        
+        if drone_data:
+            drone_data = json.loads(drone_data)
+            
+            svg_x, svg_y = translate(float(drone_data['longitude']), float(drone_data['latitude']))
+            
+            drone_dict[drone_id] = {
+                'longitude': svg_x,
+                'latitude': svg_y,
+                'status': drone_data['status']
+            }
     return jsonify(drone_dict)
 
 if __name__ == "__main__":
