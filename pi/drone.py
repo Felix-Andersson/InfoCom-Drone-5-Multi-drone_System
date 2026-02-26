@@ -16,8 +16,8 @@ myID = "drone1"
 
 # Get initial longitude and latitude the drone
 #===================================================================
-current_longitude = 0
-current_latitude = 0
+current_longitude = 13.16
+current_latitude = 55.68
 #===================================================================
 
 drone_info = {'id': myID,
@@ -29,9 +29,16 @@ drone_info = {'id': myID,
 # Fill in the IP address of server, and send the initial location of the drone to the SERVER
 #===================================================================
 SERVER="http://192.168.10.10:5001/drone"
-with requests.Session() as session:
-    resp = session.post(SERVER, json=drone_info)
+#with requests.Session() as session:
+#    resp = session.post(SERVER, json=drone_info)
 #===================================================================
+def register_drone():
+   try:
+       with requests.Session() as session:
+           resp = session.post(SERVER, json=drone_info, timeout=5)
+           print(f"Registration successful: {resp.text}")
+   except requests.exceptions.RequestException as e:
+       print(f"Could not connect to server at {SERVER}. Error: {e}")
 
 @app.route('/', methods=['POST'])
 def main():
@@ -51,4 +58,5 @@ def main():
     return 'New route received'
 
 if __name__ == '__main__':
+    register_drone()
     app.run(debug=True, host='0.0.0.0')

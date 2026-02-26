@@ -17,6 +17,7 @@ def drone():
     drone = request.get_json()
     droneIP = request.remote_addr
     droneID = drone['id']
+    print("Received drone:", droneID, droneIP)
     drone_longitude = drone['longitude']
     drone_latitude = drone['latitude']
     drone_status = drone['status']
@@ -32,7 +33,7 @@ def drone():
 
 
      # =======================================================================================
-    return 'Get data'
+    return 'Get data', 200
 
 if __name__ == "__main__":
 

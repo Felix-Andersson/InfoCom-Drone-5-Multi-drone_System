@@ -46,29 +46,32 @@ def route_planner():
         # Here you need to find a drone that is availale from the database. You need to check the status of the drone, there are two status, 'busy' or 'idle', only 'idle' drone is available and can be sent the coords to run delivery
         # 1. Find avialable drone in the database (Hint: Check keys in RedisServer)
         # if no drone is availble:
-        drone_1 = redis_server.get('drone1')
-        drone_2 = redis_server.get('drone2')
-        if drone_1:
-            drone_1 = json.loads(drone_1)
-        if drone_2:
-            drone_2 = json.loads(drone_2)
+        # Hämta från Redis
+        drone_1_raw = redis_server.get('drone1')
+        drone_2_raw = redis_server.get('drone2')
+        
+        drone_1 = json.loads(drone_1_raw) if drone_1_raw else None
+        drone_2 = json.loads(drone_2_raw) if drone_2_raw else None
         
         DRONE_URL = ''
         message = ''
         
-        if drone_1['status'] == 'idle':
-            DRONE_URL = 'http://' + drone_1['ip']+':5000'
+        # Kontrollera Drone 1 (måste finnas OCH vara idle)
+        if drone_1 and drone_1.get('status') == 'idle':
+            DRONE_URL = f"http://{drone_1['ip']}:5000"
             message = 'Got address and sent request to the drone 1'
-        elif drone_2['status'] == 'idle':
-            DRONE_URL = 'http://' + drone_2['ip']+':5000'
+            
+        # Kontrollera Drone 2
+        elif drone_2 and drone_2.get('status') == 'idle':
+            DRONE_URL = f"http://{drone_2['ip']}:5000"
             message = 'Got address and sent request to the drone 2'
+            
         else:
-            return 'No available drone, try later'
+            return 'No available drone or drones not found in database, try later'
 
-        # 3. Send coords to the URL of available drone
+        # Skicka request
         send_request(DRONE_URL, coords)
         return message
-        # ======================================================================
 
 
 if __name__ == "__main__":

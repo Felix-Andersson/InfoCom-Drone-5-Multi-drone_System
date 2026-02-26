@@ -59,7 +59,7 @@ def get_drones():
         if drone_data:
             drone_data = json.loads(drone_data)
             
-            svg_x, svg_y = translate(float(drone_data['longitude']), float(drone_data['latitude']))
+            svg_x, svg_y = translate((float(drone_data['longitude']), float(drone_data['latitude'])))
             
             drone_dict[drone_id] = {
                 'longitude': svg_x,
